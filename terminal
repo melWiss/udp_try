@@ -1,0 +1,1 @@
+echo "hiiiii from terminal" | nc -4u 127.0.0.1 65001
