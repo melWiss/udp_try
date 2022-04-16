@@ -10,24 +10,6 @@ void main(List<String> args) async {
   var endp1 = Endpoint.unicast(InternetAddress("0.0.0.0"), port: p1);
   var socket = await UDP.bind(endp1);
 
-  // connect to RECONN SERVER
-  socket.send(
-    [0],
-    Endpoint.unicast(
-      InternetAddress(args.isNotEmpty ? args[0] : "102.158.140.104"),
-      port: Port(args.length > 1 ? int.parse(args[1]) : 55001),
-    ),
-  );
-  Timer.periodic(Duration(seconds: 20), (t) {
-    socket.send(
-      [0],
-      Endpoint.unicast(
-        InternetAddress(args.isNotEmpty ? args[0] : "102.158.140.104"),
-        port: Port(args.length > 1 ? int.parse(args[1]) : 55001),
-      ),
-    );
-  });
-
   // listen for connections
   socket.asStream().listen((event) {
     String response = String.fromCharCodes(event!.data);
@@ -41,6 +23,26 @@ void main(List<String> args) async {
       }
       // ignore: empty_catches
     } catch (e) {}
+  });
+
+  // connect to RECONN SERVER
+  for (int i = 0; i < 5; i++) {
+    socket.send(
+      [0],
+      Endpoint.unicast(
+        InternetAddress(args.isNotEmpty ? args[0] : "102.158.140.104"),
+        port: Port(args.length > 1 ? int.parse(args[1]) : 55001),
+      ),
+    );
+  }
+  Timer.periodic(Duration(seconds: 10), (t) {
+    socket.send(
+      [0],
+      Endpoint.unicast(
+        InternetAddress(args.isNotEmpty ? args[0] : "102.158.140.104"),
+        port: Port(args.length > 1 ? int.parse(args[1]) : 55001),
+      ),
+    );
   });
 
   stdin.listen((event) {

@@ -14,15 +14,17 @@ void main(List<String> args) async {
   socket.asStream().listen(
     (event) async {
       print("REQUEST ${event!.address.address}:${event.port} ");
-      if (ips.containsKey(event.address.address)) {
-        if (ips[event.address.address] != event.port) {
-          ips[event.address.address] = event.port;
+      String ip = event.address.address;
+      if (ip == "127.0.0.1") ip = "102.158.140.104";
+      if (ips.containsKey(ip)) {
+        if (ips[ip] != event.port) {
+          ips[ip] = event.port;
           //notify all peers
           notifyAllPeers(ips, socket);
           print(ips);
         }
       } else {
-        ips.addAll({event.address.address: event.port});
+        ips.addAll({ip: event.port});
         //notify all peers
         notifyAllPeers(ips, socket);
         print(ips);
