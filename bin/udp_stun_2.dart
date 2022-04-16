@@ -12,8 +12,7 @@ void main(List<String> args) async {
 
   stdout.write("PEER1: ");
   socket.asStream().listen((event) {
-    print("PEER2 (${event!.address.address}:${event.port}): " +
-        String.fromCharCodes(event.data));
+    print("PEER2: " + String.fromCharCodes(event!.data));
     stdout.write("PEER1: ");
   });
 
