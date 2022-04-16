@@ -35,9 +35,14 @@ void main(List<String> args) async {
 }
 
 notifyAllPeers(Map<String, int> ips, UDP socket) {
+  var data = {
+    "type": "CONNECTIONS",
+    "data": ips,
+  };
+  var response = jsonEncode(data).codeUnits;
   ips.forEach((key, value) async {
     socket.send(
-      jsonEncode(ips).codeUnits,
+      response,
       Endpoint.unicast(
         InternetAddress(key),
         port: Port(value),
