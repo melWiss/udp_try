@@ -44,7 +44,11 @@ void main(List<String> args) async {
   });
 
   stdin.listen((event) {
-    sendToAllPeers(peers, socket, event);
+    var data = {
+      "type": "DATA",
+      "data": String.fromCharCodes(event),
+    };
+    sendToAllPeers(peers, socket, jsonEncode(data).codeUnits);
   });
 }
 
