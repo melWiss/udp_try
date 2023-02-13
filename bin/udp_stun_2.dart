@@ -16,13 +16,16 @@ void main(List<String> args) async {
     try {
       Map<String, dynamic> responseData = jsonDecode(response);
       if (responseData["type"] == "CONNECTIONS") {
-        peers = responseData["data"];
+        peers = Map<String, int>.from(responseData["data"]);
         connectAllPeers(peers, socket);
       } else if (responseData["type"] == "DATA") {
         print("${event.address.address}:${event.port}/ $responseData");
       }
       // ignore: empty_catches
-    } catch (e) {}
+    } catch (e) {
+      print("ERROR: ${e.toString()}");
+      print(response);
+    }
   });
 
   // connect to RECONN SERVER
