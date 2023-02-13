@@ -19,7 +19,8 @@ void main(List<String> args) async {
         peers = Map<String, int>.from(responseData["data"]);
         connectAllPeers(peers, socket);
       } else if (responseData["type"] == "DATA") {
-        print("${event.address.address}:${event.port}/ $responseData");
+        print(
+            "${event.address.address}:${event.port}# ${responseData['data']}");
       }
       // ignore: empty_catches
     } catch (e) {
