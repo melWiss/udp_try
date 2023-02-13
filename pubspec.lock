@@ -5,14 +5,16 @@ packages:
     dependency: "direct dev"
     description:
       name: lints
-      url: "https://pub.dartlang.org"
+      sha256: a2c3d198cb5ea2e179926622d433331d8b58374ab8f29cdda6e863bd62fd369c
+      url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
   udp:
     dependency: "direct main"
     description:
       name: udp
-      url: "https://pub.dartlang.org"
+      sha256: "50ea45d7ee80ad4c62de4ec0e8ed3ae65c36e9fe8cd0655a2bcd1503d2708e5a"
+      url: "https://pub.dev"
     source: hosted
     version: "5.0.3"
 sdks:
